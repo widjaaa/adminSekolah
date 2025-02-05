@@ -61,7 +61,7 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
     <label for="kelas" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
       <select name="kelas" id="kelas" class="form-select border-0 border-bottom" required>
-        <option value="">Pilih Kelas</option>
+        <option selected>Pilih Kelas</option>
         <option value="X">X</option>
         <option value="XI">XI</option>
         <option value="XII">XII</option>
@@ -73,7 +73,7 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
     <label for="jurusan" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
       <select name="jurusan" id="jurusan" class="form-select border-0 border-bottom" required>
-        <option value="">Pilih Jurusan</option>
+        <option selected>Pilih Jurusan</option>
         <option value="ipa">IPA</option>
         <option value="ips">IPS</option>
         
@@ -90,7 +90,7 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
         </div>
         <div class="col-4 text-center px-5">
             <img src="../assets/img/salinan default.png" alt="" class="mb-3" width="40%">
-            <input type="file" name="img" class="form-control form-control-sm">
+            <input type="file" name="image" class="form-control form-control-sm">
             <small class="text-secondary">Pilih foto PNG, JPG atau JPEG dengan ukuran maximal 1MB</small>
             <div><small class="text-secondary">width = height</small></div>
         </div>

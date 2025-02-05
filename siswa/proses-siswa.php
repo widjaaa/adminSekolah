@@ -14,16 +14,16 @@ if (isset($_POST['simpan'])){
     $kelas = $_POST["kelas"];
     $jurusan = $_POST["jurusan"];
     $alamat = htmlspecialchars($_POST['alamat']);
-    $foto = trim(htmlspecialchars($_FILES['img']['nama']));
+    $foto = htmlspecialchars($_FILES['image']['name']);
 
     if ($foto != null){
-        $url = "add-siswa.php";
+        $url = 'add-siswa.php';
         $foto = uploadimg($url);
     } else {
         $foto='salinan default.png';
     }
 
-    mysqli_query($koneksi, "INSERT INTO tbl_siswa VALUES('$nis','$nama','$alamat','$kelas','$jurusan','$foto')");
+    mysqli_query($koneksi, "INSERT INTO tbl_siswa VALUES( '$nis','$nama','$alamat','$kelas','$jurusan','$foto')");
 
     echo "<script>
             alert('Data siswa berhasil disimpan');
