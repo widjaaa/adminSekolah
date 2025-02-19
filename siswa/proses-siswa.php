@@ -14,10 +14,10 @@ if (isset($_POST['simpan'])){
     $kelas = $_POST["kelas"];
     $jurusan = $_POST["jurusan"];
     $alamat = htmlspecialchars($_POST['alamat']);
-    $foto = htmlspecialchars($_FILES['image']['name']);
+    $foto = htmlspecialchars($_FILES['gambar']['name']);
 
     if ($foto != null){
-        $url = 'add-siswa.php';
+        $url = "add-siswa.php";
         $foto = uploadimg($url);
     } else {
         $foto='salinan default.png';

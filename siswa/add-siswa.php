@@ -90,7 +90,7 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
         </div>
         <div class="col-4 text-center px-5">
             <img src="../assets/img/salinan default.png" alt="" class="mb-3" width="40%">
-            <input type="file" name="image" class="form-control form-control-sm">
+            <input type="file" name="gambar" class="form-control form-control-sm">
             <small class="text-secondary">Pilih foto PNG, JPG atau JPEG dengan ukuran maximal 1MB</small>
             <div><small class="text-secondary">width = height</small></div>
         </div>

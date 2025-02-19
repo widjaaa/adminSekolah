@@ -28,7 +28,7 @@ require_once "../template/sidebar.php";
     <a href= "<?= $main_url ?>siswa/add-siswa.php" class="btn btn-primary btn-sm float-end"><i class="fa-solid fa-plus"></i> Tambah Siswa</a>
   </div>
   <div class="card-body">
-    <table class="table table-hover">
+    <table class="table table-hover" id="datatablesSimple">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -42,19 +42,27 @@ require_once "../template/sidebar.php";
     </tr>
   </thead>
   <tbody>
+    <?php 
+    $no = 1;
+    $querySiswa = mysqli_query($koneksi, "SELECT * FROM tbl_siswa");
+    while ($data = mysqli_fetch_array($querySiswa)){?>
+
+
+   
     <tr>
-      <th scope="row">1</th>
-      <td>Foto</td>
-      <td>NIS</td>
-      <td>Nama</td>
-      <td>Kelas</td>
-      <td>Jurusan</td>
-      <td>Alamat</td>
+      <th scope="row"><?= $no++ ?></th>
+      <td align="center"><img src="../assets/img/<?= $data ['foto']?>" class="rounded-circle" alt="foto siswa" width="60px"></td>
+      <td align="center"><?= $data ['nis']?></td>
+      <td align="center"><?= $data ['nama']?></td>
+      <td align="center"><?= $data ['kelas']?></td>
+      <td align="center"><?= $data ['jurusan']?></td>
+      <td align="center"><?= $data ['alamat']?></td>
       <td align="center">
         <a href="" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"title="Update Siswa"></i></a>
         <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash" title="Hapus Siswa"></i> </a>
       </td>
     </tr>
+    <?php }?>
   </tbody>
 </table>
   </div>

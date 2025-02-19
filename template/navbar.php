@@ -35,12 +35,12 @@
 
         <div class="modal" tabindex="-1" id="mdlProfileUser">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Profile User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+       <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Profile User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+          <div class="modal-body">
         <div class="card mb-3 border-0" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
@@ -62,11 +62,11 @@
     </div>
   </div>
          <div class="row">          
-    <label for="alamat" class="col-sm-3 col-form-label pe-0">Alamat</label>
-    <div class="col-sm-9">
-     <textarea id="alamat" cols="30" rows="2" class="form-control border-0 bg-transparent" readonly>: <?= $profile['alamat'] ?></textarea>
-    </div>
-  </div>
+               <label for="alamat" class="col-sm-3 col-form-label pe-0">Alamat</label>
+               <div class="col-sm-9">
+                 <textarea id="alamat" cols="30" rows="2" class="form-control border-0 bg-transparent" readonly>: <?= $profile['alamat'] ?></textarea>
+               </div>
+         </div>
       </div>
     </div>
   </div>
