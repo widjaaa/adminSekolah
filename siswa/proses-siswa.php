@@ -30,6 +30,37 @@ if (isset($_POST['simpan'])){
             document.location.href = 'add-siswa.php';
     </script>";
     return;
+} else if(isset($_POST["update"])){
+    $nis = $_POST["nis"];
+    $nama = htmlspecialchars($_POST["nama"]);
+    $kelas = $_POST["kelas"];
+    $jurusan = $_POST["jurusan"];
+    $alamat = htmlspecialchars($_POST["alamat"]);
+    $foto = htmlspecialchars($_FILES["fotoLama"]);
+
+    if ($_FILES['gambar']['error'] === 4){
+        $fotoSiswa = $foto;
+    } else {
+        $url = 'siswa.php';
+        $fotoSiswa = uploadimg($url);
+        if($foto != 'salinan default.png'){
+            @unlink('../assets/img/' . $foto);
+        }
+    }
+    mysqli_query($koneksi,"UPDATE tbl_siswa SET 
+                                        nama = '$nama',
+                                        kelas = '$kelas',
+                                        jurusan = '$jurusan',
+                                        alamat = '$alamat',
+                                        foto = '$fotoSiswa'
+                                        WHERE NIS = '$nis'
+                                        ");
+    echo "<script>
+            alert('Data siswa berhasil di update');
+            document.location.href= 'siswa.php';
+    
+    </script>";
+    return;
 }
 
 ?>

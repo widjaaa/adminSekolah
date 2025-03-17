@@ -7,37 +7,33 @@ if(!isset($_SESSION["ssLogin"])){
 }
 
 require_once "../config.php";
-$title = "Tambah Siswa - SMA Widjaya";
+$title = "Update Siswa - SMA Widjaya";
 require_once "../template/header.php";
 require_once "../template/navbar.php";
 require_once "../template/sidebar.php";
 
 
-$queryNis = mysqli_query($koneksi, "SELECT max(nis) as maxnis FROM tbl_siswa");
-$data = mysqli_fetch_array($queryNis);
-$maxnis = $data["maxnis"];
+$nis = $_GET['nis'];
 
-$noUrut = (int) substr($maxnis, 3, 3);
-$noUrut++;
-$maxnis = "NIS" . sprintf("%03s", $noUrut);
+$siswa = mysqli_query($koneksi, "SELECT * FROM tbl_siswa WHERE nis = '$nis'");
+$data = mysqli_fetch_array($siswa);
 ?>
 
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tambah Siswa</h1>
+                        <h1 class="mt-4">Update Siswa</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
                             <li class="breadcrumb-item active"><a href="siswa.php">Siswa</a></li>
-                            <li class="breadcrumb-item active">Tambah Siswa</li>
+                            <li class="breadcrumb-item active">Update Siswa</li>
                         </ol>
 
                         <form action="proses-siswa.php" method="POST" enctype="multipart/form-data">
                         <div class="card">
   <div class="card-header">
-    <span class="h5 my-2"><i class="fa-solid fa-square-plus"></i> Tambah Siswa</span>
-    <button type="submit" name="simpan" class="btn btn-primary float-end"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
-    <button type="reset" name="reset" class="btn btn-danger float-end me-1"><i class="fa-solid fa-xmark"></i> Reset</button>
+    <span class="h5 my-2"><i class="fa-solid fa-pen-to-square"></i> Update Siswa</span>
+    <button type="submit" name="update" class="btn btn-primary float-end"><i class="fa-solid fa-floppy-disk"></i> Update</button>
   </div>
   <div class="card-body">
     <div class="row">
@@ -46,14 +42,14 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
     <label for="nis" class="col-sm-2 col-form-label">NIS</label>
     <label for="nis" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
-      <input type="text" name="nis" readonly class="form-control-plaintext border-bottom ps-2" id="nis"  value="<?= $maxnis ?>">
+      <input type="text" name="nis" readonly class="form-control-plaintext border-bottom ps-2" id="nis"  value="<?= $nis ?>">
     </div>
   </div>
             <div class="mb-3 row">
     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
     <label for="nama" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
-      <input type="text" name="nama" required class="form-control border-bottom ps-2 border-0 border-bottom" id="nama">
+      <input type="text" name="nama" required class="form-control border-bottom ps-2 border-0 border-bottom" id="nama" value="<?= $data['nama']?>">
     </div>
   </div>
             <div class="mb-3 row">
@@ -61,10 +57,19 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
     <label for="kelas" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
       <select name="kelas" id="kelas" class="form-select border-0 border-bottom" required>
-        <option selected>Pilih Kelas</option>
-        <option value="X">X</option>
-        <option value="XI">XI</option>
-        <option value="XII">XII</option>
+       <?php
+       $kelas = ["X","XI","XII"];
+       foreach($kelas as $kls){
+        if($data['kelas'] == $kls){
+            ?>
+            <option value="<?= $kls; ?>"selected><?= $kls; ?></option>
+            <?php } else { ?>
+                <option value="<?= $kls; ?>"><?= $kls; ?></option>
+                <?php
+            }
+       }
+
+       ?>
       </select>
     </div>
   </div>
@@ -73,10 +78,16 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
     <label for="jurusan" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
       <select name="jurusan" id="jurusan" class="form-select border-0 border-bottom" required>
-        <option selected>Pilih Jurusan</option>
-        <option value="ipa">IPA</option>
-        <option value="ips">IPS</option>
-        
+       <?php 
+       $jurusan = ["IPA","IPS"];
+       foreach($jurusan as $jrs){
+            if($data["jurusan"] == $jrs){?>
+            <option value="<?= $jrs ?>"selected><?= $jrs ?></option>
+            <?php } else { ?>
+                <option value="<?= $jrs ?>"><?= $jrs ?></option>
+       <?php }
+       }
+       ?>
       </select>
     </div>
   </div>
@@ -84,12 +95,13 @@ $maxnis = "NIS" . sprintf("%03s", $noUrut);
     <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
     <label for="alamat" class="col-sm-1 col-form-label">:</label>
     <div class="col-sm-9" style="margin-left: -50px;">
-     <textarea name="alamat" id="alamat" cols="30" rows="3" placeholder="Alamat Siswa" class="form-control" required></textarea>
+     <textarea name="alamat" id="alamat" cols="30" rows="3" placeholder="Alamat Siswa" class="form-control" required><?= $data['alamat'] ?></textarea>
     </div>
   </div>
         </div>
         <div class="col-4 text-center px-5">
-            <img src="../assets/img/salinan default.png" alt="" class="mb-3" width="40%">
+            <input type="hidden" name="fotoLama" value="<?= $data['foto']?>">
+            <img src="../assets/img/<?= $data['foto']?>" alt="" class="mb-3 rounded-circle" width="40%">
             <input type="file" name="gambar" class="form-control form-control-sm">
             <small class="text-secondary">Pilih foto PNG, JPG atau JPEG dengan ukuran maximal 10MB</small>
             <div><small class="text-secondary">width = height</small></div>

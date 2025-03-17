@@ -58,8 +58,8 @@ require_once "../template/sidebar.php";
       <td align="center"><?= $data ['jurusan']?></td>
       <td align="center"><?= $data ['alamat']?></td>
       <td align="center">
-        <a href="" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"title="Update Siswa"></i></a>
-        <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash" title="Hapus Siswa"></i> </a>
+        <a href="edit-siswa.php?nis=<?=$data['nis']?>" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"title="Update Siswa"></i></a>
+        <a href="hapus-siswa.php?nis=<?= $data['nis']?>&foto=<?= $data['foto']?>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash" title="Hapus Siswa" onclick="return confirm('Anda yakin ingin menghapus data ini ?')"></i> </a>
       </td>
     </tr>
     <?php }?>

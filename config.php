@@ -29,13 +29,13 @@ function uploadimg($url){
     }
 
     // cek ukuran file\
-    if($ukuranfile > 1000000){
+    if($ukuranfile > 10000000){
         header("location:" . $url . '?msg=oversize');
         die;
     }
 
     // generate nama file baru
-    if($url = 'profile-sekolah.php'){
+    if($url == 'profile-sekolah.php'){
         $namafilebaru = rand(0, 50) . '-bgLogin.' . $fileExtention;
     }else{
         $namafilebaru = rand(10, 100) . '-' . $namafile;
